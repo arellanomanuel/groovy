@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VqlQueryRestResult>
+	<responseStatus>SUCCESS</responseStatus>
+	<responseDetails>
+		<limit>1000</limit>
+		<offset>0</offset>
+		<size>3</size>
+		<total>3</total>
+	</responseDetails>
+	<data>
+		<row>
+			<Field1>ABC</Field1>
+			<Field2>123</Field2>
+			<Field3>XXX</Field3>
+			<Field4>567890</Field4>
+		</row>
+		<row>
+		    <Field1>ABC</Field1>
+			<Field2>123</Field2>
+			<Field3>XXX</Field3>
+			<Field4>567890</Field4>
+		</row>
+		<row>
+			<Field1>ABC</Field1>
+			<Field2>123</Field2>
+			<Field3>XXX</Field3>
+			<Field4>567890</Field4>
+		</row>
+	</data>
+</VqlQueryRestResult>
