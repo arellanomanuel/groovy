@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><response version-api="2.0">
+    
+  <value>
+        
+    <books>
+            
+      <book available="14" id="2">
+                
+        <title>Catcher in the Rye</title>
+                
+        <author id="2">JD Salinger</author>
+              
+      </book>
+            
+      <book available="13" id="3">
+                
+        <title>Alice in Wonderland</title>
+                
+        <author id="3">Lewis Carroll</author>
+              
+      </book>
+            
+      <book available="5" id="4">
+                
+        <title>Don Quixote</title>
+                
+        <author id="4">Miguel de Cervantes</author>
+              
+      </book>
+          
+    </books>
+      
+  </value>
+  
+</response>
