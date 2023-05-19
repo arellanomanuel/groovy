@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+   <entry>
+      <content type="application/xml">
+         <m:properties>
+            <d:key>3419</d:key>
+            <d:status>OK</d:status>
+            <d:editStatus>INSERTED</d:editStatus>
+            <d:message>Insert group is successful</d:message>
+            <d:index m:type="Edm.Int32">0</d:index>
+            <d:httpCode m:type="Edm.Int32">201</d:httpCode>
+            <d:inlineResults m:type="Bag(SFOData.UpsertResult)" />
+         </m:properties>
+      </content>
+   </entry>
+</feed>
