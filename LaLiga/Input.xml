@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<multimap:Messages xmlns:multimap="http://sap.com/xi/XI/SplitAndMerge">
+	<multimap:Message1>
+		<root>
+			<personIdExternal>00000130</personIdExternal>
+			<userId>00000130</userId>
+			<fecha_inicio_corte>2022-02-01</fecha_inicio_corte>
+			<fecha_fin_corte>2022-02-01</fecha_fin_corte>
+			<fecha_alta>2022-02-01</fecha_alta>
+			<fecha_baja/>
+			<senotityDate>2016-05-23</senotityDate>
+			<firstName>María José</firstName>
+			<lastName>Silva Trigo</lastName>
+			<company>2410</company>
+			<emplStatus>A</emplStatus>
+			<job_title>Coordinadora LaLiga Experience</job_title>
+			<business_unit>Dirección Audiovisual</business_unit>
+			<department>Asuntos Internacionales</department>
+			<cost_center>AUDIOVISUAL</cost_center>
+			<ceco>AUDG9001</ceco>
+			<delegacion>Madrid Torrelaguna</delegacion>
+			<job_code>Marketing, comercial y activación. Desarrollo de negocio COORDINADOR</job_code>
+			<fte>1.0</fte>
+		</root>
+		<root>
+			<personIdExternal>00000130</personIdExternal>
+			<userId>00000130</userId>
+			<fecha_inicio_corte>2022-02-01</fecha_inicio_corte>
+			<fecha_fin_corte>2022-04-04</fecha_fin_corte>
+			<fecha_alta>2022-02-01</fecha_alta>
+			<fecha_baja/>
+			<senotityDate>2016-05-23</senotityDate>
+			<firstName>María José</firstName>
+			<lastName>Silva Trigo</lastName>
+			<company>2510</company>
+			<emplStatus>A</emplStatus>
+			<job_title>Coordinadora LaLiga Experience</job_title>
+			<business_unit>Dirección Audiovisual</business_unit>
+			<department>Asuntos Internacionales</department>
+			<cost_center>AUDIOVISUAL</cost_center>
+			<ceco>AUDG9001</ceco>
+			<delegacion>Madrid Torrelaguna</delegacion>
+			<job_code>Marketing, comercial y activación. Desarrollo de negocio COORDINADOR</job_code>
+			<fte>1.0</fte>
+		</root>
+      </multimap:Message1>
+</multimap:Messages>
