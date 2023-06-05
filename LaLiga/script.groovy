@@ -6,12 +6,13 @@ import java.time.LocalDate
 def Message processData(Message message) {
     def body = message.getBody(java.lang.String)
     def response = new XmlParser().parseText(body)
-    def roots_aux=[];
+
     def roots = response.'**'.findAll { it.name() == 'root' }
     def modifiedXml = ""
-    
+    def flg_fin=0
     for (int i = 0; i < roots.size() - 1; i++) {
         def root1 = roots[i]
+        println "${i} y ${root1}"
         def root2 = roots[i + 1]
         def fechaInicioCorte1 = root1.fecha_inicio_corte
         def fechaFinCorte1 = root1.fecha_fin_corte
@@ -26,40 +27,35 @@ def Message processData(Message message) {
 
         def overlap = doDateRangesOverlap(fechaInicioCorte1, fechaFinCorte1, fechaInicioCorte2, fechaFinCorte2)
         println "¿Hay alguna fecha que coincida entre los intervalos? ${overlap}"
-        def consecutivos = fusionarConsecutivos(fechaFinCorte1, fechaInicioCorte2)
-        println "¿Consecutivos? ${consecutivos}"
+         println "${roots.size()} println ${i}"
 
         if (overlap && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
             println "iguales"
             //roots[i] = roots[i + 1]
             //roots.remove(i + 1)
             roots.remove(i)
-            println "${roots}"
+            i--
+            println "${roots.size()}"
+            continue;
 
         }
-        
+        def consecutivos = fusionarConsecutivos(fechaFinCorte1, fechaInicioCorte2)
+        println "¿Consecutivos? ${consecutivos}"
         //def consecutivos = fusionarConsecutivos(fechaFinCorte1, fechaInicioCorte2)
          if (consecutivos && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
-            println "iguales2"
-            //roots[i] = roots[i + 1]
-
-            //roots[i].appendNode("fecha_inicio_corte",fechaInicioCorte1.text())
-             roots[i+1].replaceNode {
-                // Crea un nuevo nodo con los mismos elementos y valores del root2
-                'root' {
-                    
-                    fecha_inicio_corte(fechaInicioCorte1)
-                    fecha_fin_corte(fechaFinCorte2)
-        
-                    // Agrega los demás elementos que necesites
-                }
-                }
+            println "${fechaInicioCorte1}"
+             roots[i+1].fecha_inicio_corte[0].setValue(fechaInicioCorte1.text())
+            //roots[i+1].appendNode("fecha_inicio_corte",fechaInicioCorte1.text())
+            println "${fechaFinCorte2}"
+          
             roots.remove(i)
+            i--
+            continue;
         }
         
-        
-        modifiedXml += XmlUtil.serialize(roots[i])
     }
+    for (int i = 0; i < roots.size(); i++) {
+    modifiedXml += XmlUtil.serialize(roots[i])}
     modifiedXml=modifiedXml.replace(/<?xml version="1.0" encoding="UTF-8"?>/,"");
     message.setBody(modifiedXml)
     return message
