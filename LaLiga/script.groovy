@@ -30,7 +30,7 @@ def Message processData(Message message) {
             fte2="0.0"
         }
         //fte si viene vacio poner a 0.0
-
+        
         def overlap = doDateRangesOverlap(fechaInicioCorte1, fechaFinCorte1, fechaInicioCorte2, fechaFinCorte2)
         println "¿Hay alguna fecha que coincida entre los intervalos? ${overlap}"
 
@@ -56,6 +56,7 @@ def Message processData(Message message) {
     for (int i = 0; i < roots.size(); i++) {
     modifiedXml += XmlUtil.serialize(roots[i])}
     modifiedXml=modifiedXml.replace(/<?xml version="1.0" encoding="UTF-8"?>/,"");
+    modifiedXml=modifiedXml.replace("9999-12-31","");
     message.setBody(modifiedXml)
     return message
 }
