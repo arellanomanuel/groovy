@@ -20,7 +20,14 @@ def Message processData(Message message) {
             parsedXml.CompoundEmployee.person.employment_information.each { employmentInfo ->
                 EMPLEADO {
                     CODEMP(employmentInfo.job_information.company.text())
-                    CODEMP(employmentInfo.job_information.company.text())
+                    //CODTRABA nombre???? 
+                    CODTRABA(parsedXml.CompoundEmployee.person.person_id_external.text())
+                    GRUPOTC(employmentInfo.job_information.custom_string4.text())
+                    TRIBUTA_REG_GEN(employmentInfo.job_information.custom_string8.text())
+                    TRIBUTA_216(employmentInfo.job_information.custom_string9.text())
+                    APELLIDOS(parsedXml.CompoundEmployee.person.personal_information.last_name.text())
+                    NOMBRE(parsedXml.CompoundEmployee.person.personal_information.first_name.text())
+
                     // Agregar más propiedades aquí según sea necesario
                 }
             }
