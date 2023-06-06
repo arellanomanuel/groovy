@@ -9,10 +9,9 @@ def Message processData(Message message) {
 
     def roots = response.'**'.findAll { it.name() == 'root' }
     def modifiedXml = ""
-    def flg_fin=0
+
     for (int i = 0; i < roots.size() - 1; i++) {
         def root1 = roots[i]
-        println "${i} y ${root1}"
         def root2 = roots[i + 1]
         def fechaInicioCorte1 = root1.fecha_inicio_corte
         def fechaFinCorte1 = root1.fecha_fin_corte
@@ -23,31 +22,31 @@ def Message processData(Message message) {
         def id1 = root1.userId.text()
         def id2 = root2.userId.text()
         def fte1 = root1.fte.text()
+        if (fte1==""){
+            fte1="0.0"
+        }
         def fte2 = root2.fte.text()
+         if (fte2==""){
+            fte2="0.0"
+        }
+        //fte si viene vacio poner a 0.0
 
         def overlap = doDateRangesOverlap(fechaInicioCorte1, fechaFinCorte1, fechaInicioCorte2, fechaFinCorte2)
         println "¿Hay alguna fecha que coincida entre los intervalos? ${overlap}"
-         println "${roots.size()} println ${i}"
 
         if (overlap && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
-            println "iguales"
-            //roots[i] = roots[i + 1]
-            //roots.remove(i + 1)
             roots.remove(i)
             i--
-            println "${roots.size()}"
             continue;
 
         }
         def consecutivos = fusionarConsecutivos(fechaFinCorte1, fechaInicioCorte2)
-        println "¿Consecutivos? ${consecutivos}"
-        //def consecutivos = fusionarConsecutivos(fechaFinCorte1, fechaInicioCorte2)
-         if (consecutivos && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
+        println "${consecutivos}"
+                    println "${fechaInicioCorte1}"
+
+        if (consecutivos && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
             println "${fechaInicioCorte1}"
-             roots[i+1].fecha_inicio_corte[0].setValue(fechaInicioCorte1.text())
-            //roots[i+1].appendNode("fecha_inicio_corte",fechaInicioCorte1.text())
-            println "${fechaFinCorte2}"
-          
+            roots[i+1].fecha_inicio_corte[0].setValue(fechaInicioCorte1.text())         
             roots.remove(i)
             i--
             continue;
