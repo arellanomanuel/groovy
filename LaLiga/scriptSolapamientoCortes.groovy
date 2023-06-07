@@ -39,16 +39,32 @@ def Message processData(Message message) {
         
         def overlap = doDateRangesOverlap(fechaInicioCorte1, fechaFinCorte1, fechaInicioCorte2, fechaFinCorte2)
         //println "¿Hay alguna fecha que coincida entre los intervalos? ${overlap}"
-
-        if (overlap && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
-            if(es1=="A"){
+        if (id1 == id2 && es1=="A" && es2=="A") {
             roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
             roots[i+1].fecha_baja[0].setValue("")
-            }
-            if(es1!="A" && !es1.isEmpty()){
-            roots[i+1].fecha_baja[0].setValue(fechaBaja1.text()) 
+        }
+        if (id1 == id2 && es1=="A" && es2!="A") {
             roots[i+1].fecha_alta[0].setValue("")
-            }
+            roots[i+1].fecha_baja[0].setValue(fechaInicioCorte2.text())
+        }
+        if (id1 == id2 && es1!="A" && es2=="A") {
+            roots[i+1].fecha_baja[0].setValue("")
+            roots[i+1].fecha_alta[0].setValue(fechaInicioCorte2.text())
+        }
+        if (id1 == id2 && es1!="A" && es2!="A") {
+            roots[i+1].fecha_baja[0].setValue("")
+            roots[i+1].fecha_baja[0].setValue(fechaBaja1.text())
+        }
+
+        if (overlap && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
+            //if(es1=="A"){
+            //roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
+            //roots[i+1].fecha_baja[0].setValue("")
+            //}
+            //if(es1!="A" && !es1.isEmpty()){
+            //roots[i+1].fecha_baja[0].setValue(fechaBaja1.text()) 
+            //roots[i+1].fecha_alta[0].setValue("")
+            //}
             roots.remove(i)
             i--
             continue;
@@ -61,14 +77,14 @@ def Message processData(Message message) {
         //para fecha no hace falta que sean consecutivos ni fte ni ceco iguales
         if (consecutivos && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
             //println "${fechaInicioCorte1}"
-            if(es1=="A"){
-            roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
-            roots[i+1].fecha_baja[0].setValue("")
-            }
-            if(es1!="A" && !es1.isEmpty()){
-            roots[i+1].fecha_baja[0].setValue(fechaBaja1.text()) 
-            roots[i+1].fecha_alta[0].setValue("")
-            }
+            //if(es1=="A"){
+            //roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
+            //roots[i+1].fecha_baja[0].setValue("")
+            //}
+            //if(es1!="A" && !es1.isEmpty()){
+            //roots[i+1].fecha_baja[0].setValue(fechaBaja1.text()) 
+            //roots[i+1].fecha_alta[0].setValue("")
+            //}
             roots[i+1].fecha_inicio_corte[0].setValue(fechaInicioCorte1.text())         
             roots.remove(i)
             i--
