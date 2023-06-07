@@ -32,13 +32,15 @@ def Message processData(Message message) {
                     APELLIDOS(emp.person.personal_information.last_name.text())
                     NOMBRE(emp.person.personal_information.first_name.text())
                     //TO DO: solo del que tiene el tipo home
-                    DIRECCION(emp.person.address_information.address1.text())
-                    MUNICIPIO(emp.person.address_information.city.text())
-                    PROVINCIA(emp.person.address_information.state.text())
-                    //TO DO: pasar despues tlfs
-                    CODIGO_POSTAL(emp.person.address_information.zip_code.text())                    
-                    //TO DO: email solo business
-                    
+                    emp.person.address_information.each { addInfo ->
+                        if (addInfo.address_type.text() == "home") {
+                            DIRECCION(addInfo.address1.text())
+                            MUNICIPIO(addInfo.city.text())
+                            PROVINCIA(addInfo.state.text())
+                            //TO DO: pasar despues tlfs                    
+                            CODIGO_POSTAL(addInfo.zip_code.text())                    
+                        }
+                    }
                     emp.person.phone_information.each { phoneInfo ->
                         if (phoneInfo.phone_type.text() == "C") {
                             TELEFONOC(phoneInfo.phone_number.text())
@@ -75,6 +77,25 @@ def Message processData(Message message) {
                     TIPO_CONTRATO(empInf.job_information.custom_string10.text())
                     JORNADA_DIARIA(empInf.job_information.custom_double1.text())
                     FECHA_ALTA(empInf.start_date.text())
+                    FECHA_ANTIGUEDAD(empInf.seniorityDate.text())
+                    TIPO_TRABAJADOR(empInf.job_information.employee_class.text())
+                    GRUPO_COTIZACION(empInf.job_information.custom_string3.text())
+                    SITU_ESP_COTIZACION(empInf.job_information.custom_string6.text())
+                    COD_CENTRO(empInf.job_information.custom_string6.text())
+                    FECHA_BAJA(empInf.end_date.text())
+                    CAUSA(empInf.job_information.event_reason.text())
+                    //TO DO:hPath["person/employment_information/compensation_information/paycompensation_recurring/paycompvalue pay_component = 0YA/"]
+                    SALARIO_BRUTO_ANUAL(empInf.compensation_information.paycompensation_recurring.paycompvalue.text())
+                    
+                    NOMBRE_DEPARTAMENTO(empInf.job_information.department.text())
+                    CONVENIO_VACACIONES(empInf.job_information.custom_string12.text())
+
+                    //TO DO: email solo business
+                    emp.person.email_information.each { emailInfo ->
+                        if (emailInfo.email_taype.text() == "B") {
+                        DIRECCION_EMAIL(emailInfo.email_address.text())
+                        }
+                    }
 
                     // Agregar más propiedades aquí según sea necesario
                 
