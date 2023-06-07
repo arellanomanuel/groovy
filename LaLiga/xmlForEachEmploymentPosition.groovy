@@ -23,6 +23,8 @@ def Message processData(Message message) {
                     //no nesta en el excel CODTRABA_INTERNO -> user_id de employmentinformation
                     //campo si es principal o no lectura mapa
                     CODTRABA(emp.person.person_id_external.text())
+                    //este o user_di
+                    CODTRABA_INTERNO(empInf.assignmentIdExternal.text())
                     N_MATRICULA(emp.person.person_id_external.text())
                     GRUPOTC(empInf.job_information.custom_string4.text())
                     TRIBUTA_REG_GEN(empInf.job_information.custom_string8.text())
@@ -96,6 +98,22 @@ def Message processData(Message message) {
                         DIRECCION_EMAIL(emailInfo.email_address.text())
                         }
                     }
+                    
+                    GRADO_DISCAPACIDAD(emp.person.personal_information.personal_information_esp.custom_string1.text())
+                    AYUDA_DESPLAZAMIENTO(emp.person.personal_information.personal_information_esp.custom_string2.text())
+                    //TO DO: HIJOS Y ASCENDENTES
+
+                    SITUACION_FISCAL(emp.person.personal_information.marital_status.text())
+                    NIF_CONYUGE(emp.person.personal_information.personal_information_esp.genericString1.text())
+                    VARIABLE_ANIO_ANT(empInf.compensation_information.custom_string46.text())
+                    VARIABLE_PREVISTA(empInf.compensation_information.custom_string1.text())
+                    FECHA_FIN_CONTRATO(empInf.job_information.contract_end_date.text())
+
+                    //TO DO: con q se compara sin ejemplos
+
+                    SEGURO_MEDICO(empInf.compensation_information.paycompensation_recurring.paycompvalue.text())
+                    TELETRABAJO(empInf.compensation_information.paycompensation_recurring.paycompvalue.text())
+                    PORCEN_VARIABLE(empInf.compensation_information.paycompensation_recurring.paycompvalue.text())
 
                     // Agregar más propiedades aquí según sea necesario
                 
