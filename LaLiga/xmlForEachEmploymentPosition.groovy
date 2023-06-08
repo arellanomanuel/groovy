@@ -18,6 +18,7 @@ def Message processData(Message message) {
             parsedXml.CompoundEmployee.each { emp ->
                  emp.person.employment_information.each { empInf ->
                  EMPLEADO{
+                    n=1
                     CODTRABA(emp.person.person_id_external.text())
                     //este o user_id
                     CODTRABA_INTERNO(empInf.assignmentIdExternal.text())
@@ -66,13 +67,11 @@ def Message processData(Message message) {
                             NIF_CONYUGE(perInfo.personal_information_esp.genericString1.text())
                         }
                     }
-                    //TO DO: solo del que tiene el tipo home
                     emp.person.address_information.each { addInfo ->
                         if (addInfo.address_type.text() == "home" && addInfo.end_date.text()=="9999-12-31") {
                             DIRECCION(addInfo.address1.text())
                             MUNICIPIO(addInfo.city.text())
                             PROVINCIA(addInfo.state.text())
-                            //TO DO: pasar despues tlfs                    
                             CODIGO_POSTAL(addInfo.zip_code.text())                    
                         }
                     }
@@ -91,8 +90,6 @@ def Message processData(Message message) {
                             TELEFONOB(phoneInfo.phone_number.text())
                         }
                     }
-                    //TO DO: sin ejemplos de empleados con national_id_card
-                    //TO DO: if N_AFILIACION == NAF ????
                     emp.person.national_id_card.each { idCard ->
                         if (idCard.card_type.text() == "NAF") {
                             COD_DOCUMENTO_IDENTIF(idCard.card_type.text())
@@ -102,7 +99,6 @@ def Message processData(Message message) {
                             COD_DOCUMENTO_IDENTIF(idCard.card_type.text())
                             DOCUMENTO_IDENTIFI(idCard.national_id.text())
                         }
-                            //TO DO: if N_AFILIACION == COD_DOCUMENTO_IDENTIF ????
                         
                     }
                     FECHA_NACIMIENTO(emp.person.date_of_birth.text())
@@ -114,8 +110,6 @@ def Message processData(Message message) {
                     FECHA_ANTIGUEDAD(empInf.seniorityDate.text())
                     FECHA_BAJA(empInf.end_date.text())
                    
-                    
-                    //TO DO: email solo business
                     emp.person.email_information.each { emailInfo ->
                         if (emailInfo.email_taype.text() == "B") {
                         DIRECCION_EMAIL(emailInfo.email_address.text())
@@ -124,7 +118,27 @@ def Message processData(Message message) {
                     
                  
                     //TO DO: HIJOS Y ASCENDENTES
+                                        
+                    HIJOS{
+                    emp.person.dependent_information.each { depInfo ->
+                        if (depInfo.dependent_relation_information.custom_string1.text()=="D") {
+                        HIJO{
+                            F_NACI_HIJO(depInfo.date_of_birth.text())
+                                    }
+                                }
+                            }
+                        }
+                    
 
+                    ASCENDENTES{
+                    emp.person.dependent_information.each { depInfo ->
+                    if (depInfo.dependent_relation_information.custom_string1.text()=="A") {
+                        ASCENDENTE{
+                            F_NACI_ASCEN(depInfo.date_of_birth.text())
+                                }
+                            }   
+                        }
+                    }
                     
                     empInf.compensation_information.each { comInfo ->
                         if (comInfo.end_date.text()=="9999-12-31") {
@@ -132,7 +146,6 @@ def Message processData(Message message) {
                             VARIABLE_PREVISTA(comInfo.custom_string1.text())
                             comInfo.paycompensation_recurring.each { pComInfo ->
                                 if (pComInfo.end_date.text()=="9999-12-31" && pComInfo.pay_component.text()=="0YA") {
-                                    //TO DO:hPath["person/employment_information/compensation_information/paycompensation_recurring/paycompvalue pay_component = 0YA/"]
                                     SALARIO_BRUTO_ANUAL(pComInfo.paycompvalue.text())
                                 }
                                 if (pComInfo.end_date.text()=="9999-12-31" && pComInfo.pay_component.text()=="4") {    
