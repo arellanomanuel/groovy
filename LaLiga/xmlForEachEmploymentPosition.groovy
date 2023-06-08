@@ -100,9 +100,16 @@ def Message processData(Message message) {
                     }
                     FECHA_NACIMIENTO(emp.person.date_of_birth.text())
                     //TO DO: sin ejemplos de empleados con iban me falta PaymentInformationV3 FILTRAR CUSTOMPAYTYPE ==MAIN
-                    IBAN(empInf.PaymentInformationV3.PaymentInformationDetailV3.iban.text())
-                    CUENTA_BANCARIA(empInf.PaymentInformationV3.PaymentInformationDetailV3.accountNumber.text())
-
+                    empInf.PaymentInformationV3.each { payInfo ->
+                        if (payInfo.effectiveEndDate.text() == "9999-12-31") {
+                            payInfo.PaymentInformationDetailV3.each { payDeInfo ->
+                            if (payDeInfo.customPayType.text() == "MAIN") {
+                                IBAN(payDeInfo.iban.text())
+                                CUENTA_BANCARIA(payDeInfo.accountNumber.text())
+                                }
+                            }
+                        }
+                    }
                     FECHA_ALTA(empInf.start_date.text())
                     FECHA_ANTIGUEDAD(empInf.seniorityDate.text())
                     FECHA_BAJA(empInf.end_date.text())
