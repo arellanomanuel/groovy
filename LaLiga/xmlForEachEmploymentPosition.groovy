@@ -18,10 +18,8 @@ def Message processData(Message message) {
             parsedXml.CompoundEmployee.each { emp ->
                  emp.person.employment_information.each { empInf ->
                  EMPLEADO{
-                    n=1
                     CODTRABA(emp.person.person_id_external.text())
-                    //este o user_id
-                    CODTRABA_INTERNO(empInf.assignmentIdExternal.text())
+                    CODTRABA_INTERNO(empInf.user_id.text())
                     N_MATRICULA(emp.person.person_id_external.text())
 
                    empInf.job_information.each { jobInfo ->
@@ -33,7 +31,6 @@ def Message processData(Message message) {
                             REGIMEN_FORAL(jobInfo.custom_string8.text())
                             TRIBUTA_216(jobInfo.custom_string9.text())
                             CECO(jobInfo.department.text())
-                            //TO DO: O2cecos mismo nombre
                             CECO(jobInfo.custom_string101.text())
                             
                             CODIGO_CATEGORIA(jobInfo.job_code.text())
@@ -102,7 +99,7 @@ def Message processData(Message message) {
                         
                     }
                     FECHA_NACIMIENTO(emp.person.date_of_birth.text())
-                    //TO DO: sin ejemplos de empleados con iban me falta PaymentInformationV3
+                    //TO DO: sin ejemplos de empleados con iban me falta PaymentInformationV3 FILTRAR CUSTOMPAYTYPE ==MAIN
                     IBAN(empInf.PaymentInformationV3.PaymentInformationDetailV3.iban.text())
                     CUENTA_BANCARIA(empInf.PaymentInformationV3.PaymentInformationDetailV3.accountNumber.text())
 
