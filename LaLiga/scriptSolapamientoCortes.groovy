@@ -9,8 +9,13 @@ def Message processData(Message message) {
 
     def roots = response.'**'.findAll { it.name() == 'root' }
     def modifiedXml = ""
+    def modifiedXml2 = ""
     //FECHA ALTA A ARRASTRAR INICIAL BAJA IGUAL
     for (int i = 0; i < roots.size() - 1; i++) {
+        for (int j = 0; j < 1; j++) {
+    modifiedXml2 += XmlUtil.serialize(roots[j])}
+    //println "----------------\n ${modifiedXml2}"
+    
         def root1 = roots[i]
         def root2 = roots[i + 1]
         def fechaInicioCorte1 = root1.fecha_inicio_corte
@@ -55,21 +60,6 @@ def Message processData(Message message) {
             roots[i+1].fecha_baja[0].setValue("")
             roots[i+1].fecha_baja[0].setValue(fechaBaja1.text())
         }
-
-        if (overlap && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
-            //if(es1=="A"){
-            //roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
-            //roots[i+1].fecha_baja[0].setValue("")
-            //}
-            //if(es1!="A" && !es1.isEmpty()){
-            //roots[i+1].fecha_baja[0].setValue(fechaBaja1.text()) 
-            //roots[i+1].fecha_alta[0].setValue("")
-            //}
-            roots.remove(i)
-            i--
-            continue;
-
-        }
         def consecutivos = fusionarConsecutivos(fechaFinCorte1, fechaInicioCorte2)
         //println "${consecutivos}"
         //println "${fechaInicioCorte1}"
@@ -90,8 +80,23 @@ def Message processData(Message message) {
             i--
             continue;
         }
+        if (overlap && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
+            //if(es1=="A"){
+            //roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
+            //roots[i+1].fecha_baja[0].setValue("")
+            //}
+            //if(es1!="A" && !es1.isEmpty()){
+            //roots[i+1].fecha_baja[0].setValue(fechaBaja1.text()) 
+            //roots[i+1].fecha_alta[0].setValue("")
+            //}
+            roots.remove(i)
+            i--
+            continue;
+
+        }
         
     }
+    
     for (int i = 0; i < roots.size(); i++) {
     modifiedXml += XmlUtil.serialize(roots[i])}
     modifiedXml=modifiedXml.replace(/<?xml version="1.0" encoding="UTF-8"?>/,"");
@@ -112,5 +117,5 @@ def doDateRangesOverlap(startDate1, endDate1, startDate2, endDate2) {
 def fusionarConsecutivos(endDate1, startDate2) {
     def rangeEnd1 = LocalDate.parse(endDate1.text())
     def rangeStart2 = LocalDate.parse(startDate2.text())
-    return rangeEnd1.plusDays(1).isEqual(rangeStart2)
+    return rangeEnd1.plusDays(1).isEqual(rangeStart2) || rangeEnd1.plusDays(0).isEqual(rangeStart2)
 }
