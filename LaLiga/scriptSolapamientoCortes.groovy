@@ -80,7 +80,8 @@ def Message processData(Message message) {
             i--
             continue;
         }
-        if (overlap && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
+        //if (overlap && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
+        if (overlap && es1 == es2 ) {
             //if(es1=="A"){
             //roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
             //roots[i+1].fecha_baja[0].setValue("")
