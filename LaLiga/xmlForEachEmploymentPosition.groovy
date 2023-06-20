@@ -134,6 +134,11 @@ def Message processData(Message message) {
                         if (depInfo.dependent_relation_information.custom_string1.text()=="D") {
                         HIJO{
                             F_NACI_HIJO(depInfo.date_of_birth.text())
+                            CARGO_HIJO(depInfo.dependent_relation_information.custom_string1.text())
+                            GRADO_HIJO(depInfo.dependent_relation_information.dependent_personal_information_esp.custom_string1.text())
+                            AYUDA_HIJO(depInfo.dependent_relation_information.dependent_personal_information_esp.custom_string2.text())
+                            ADOPCION_HIJO(depInfo.dependent_relation_information.dependent_personal_information_esp.genericDate2.text())
+
                                     }
                                 }
                             }
@@ -145,6 +150,10 @@ def Message processData(Message message) {
                     if (depInfo.dependent_relation_information.custom_string1.text()=="A") {
                         ASCENDENTE{
                             F_NACI_ASCEN(depInfo.date_of_birth.text())
+                            CARGO_HIJO(depInfo.dependent_relation_information.custom_string1.text())
+                            GRADO_ASCEN(depInfo.dependent_relation_information.dependent_personal_information_esp.custom_string1.text())
+                            AYUDA_ASCEN(depInfo.dependent_relation_information.dependent_personal_information_esp.custom_string2.text())
+
                                 }
                             }   
                         }
