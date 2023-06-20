@@ -87,6 +87,11 @@ def Message processData(Message message) {
                             TELEFONOB(phoneInfo.phone_number.text())
                         }
                     }
+                    emp.person.email_information.each { emailInfo ->
+                    if (emailInfo.email_type.text() == "B") {
+                            DIRECCION_EMAIL(emailInfo.email_address.text())
+                        }
+                    }
                     emp.person.national_id_card.each { idCard ->
                         if (idCard.card_type.text() == "NAF") {
                             COD_DOCUMENTO_IDENTIF(idCard.card_type.text())
@@ -98,6 +103,7 @@ def Message processData(Message message) {
                         }
                         
                     }
+
                     FECHA_NACIMIENTO(emp.person.date_of_birth.text())
                     //TO DO: sin ejemplos de empleados con iban me falta PaymentInformationV3 FILTRAR CUSTOMPAYTYPE ==MAIN
                     empInf.PaymentInformationV3.each { payInfo ->
