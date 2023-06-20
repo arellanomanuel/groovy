@@ -166,6 +166,8 @@ def Message processData(Message message) {
                                 }
                                 if (pComInfo.end_date.text()=="9999-12-31" && pComInfo.pay_component.text()=="PorcVariable") {
                                     PORCEN_VARIABLE(pComInfo.paycompvalue.text())}
+                                if (pComInfo.end_date.text()=="9999-12-31" && pComInfo.pay_component.text()=="Variable") {
+                                    VARIABLE(pComInfo.paycompvalue.text())}
                             }
                             
                         }
