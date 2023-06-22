@@ -60,12 +60,20 @@ def Message processData(Message message) {
             roots[i+1].fecha_baja[0].setValue("")
             roots[i+1].fecha_baja[0].setValue(fechaBaja1.text())
         }
+        if (es1 =="T" && fechaFinCorte1.text() == "9999-12-31") {
+            roots[i].fecha_fin_corte[0].setValue("")
+            roots[i].fecha_fin_corte[0].setValue(fechaBaja1.text())
+        }
+        if (es2 =="T" && fechaFinCorte2.text() == "9999-12-31") {
+            roots[i+1].fecha_fin_corte[0].setValue("")
+            roots[i+1].fecha_fin_corte[0].setValue(fechaBaja2.text())
+        }
         def consecutivos = fusionarConsecutivos(fechaFinCorte1, fechaInicioCorte2)
         //println "${consecutivos}"
         //println "${fechaInicioCorte1}"
         //poner fecha alta igual a fech ini corte cuando este vacia
         //para fecha no hace falta que sean consecutivos ni fte ni ceco iguales
-        if (consecutivos && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
+        if ((consecutivos && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2 ) || (consecutivos&& id1 == id2&& overlap)) {
             //println "${fechaInicioCorte1}"
             //if(es1=="A"){
             //roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
@@ -81,7 +89,7 @@ def Message processData(Message message) {
             continue;
         }
         //if (overlap && es1 == es2 && ceco1 == ceco2 && id1 == id2 && fte1 == fte2) {
-        if (overlap && es1 == es2 ) {
+        if (overlap && id1 == id2 ) {
             //if(es1=="A"){
             //roots[i+1].fecha_alta[0].setValue(fechaAlta1.text())
             //roots[i+1].fecha_baja[0].setValue("")
